@@ -1,0 +1,278 @@
+%-------------------------------------
+% LaTeX Resume for Computer Engineer
+% Author : Treshur Allen
+% Last Edited: 12/14/2023
+%-------------------------------------
+
+\documentclass[letterpaper,12pt]{article}[leftmargin=*]
+
+\usepackage[empty]{fullpage}
+\usepackage{enumitem}
+\usepackage{ifxetex}
+\ifxetex
+  \usepackage{fontspec}
+  \usepackage[xetex]{hyperref}
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage[pdftex]{hyperref}
+\fi
+\usepackage{fontawesome}
+\usepackage[sfdefault,light]{FiraSans}
+\usepackage{anyfontsize}
+\usepackage{xcolor}
+\usepackage{tabularx}
+
+%-------------------------------------------------- SETTINGS HERE --------------------------------------------------
+% Header settings
+\def \fullname {Treshur K. Allen}
+\def \subtitle {}
+
+%\def \linkedinicon {\faLinkedin}
+%\def \linkedinlink {https://linkedin.com/in/dwight-schrute/}
+%\def \linkedintext {/dwight-schrute}
+
+\def \phoneicon {\faPhone}
+\def \phonetext {(509) 952-0733}
+
+\def \emailicon {\faEnvelope}
+\def \emaillink {mailto:treshurkiah99@gmail.com}
+\def \emailtext {treshurkiah99@gmail.com}
+
+%-----------------EDIT GIT HUB FOR CODE!!!!!!---------------------------
+
+\def \githubicon {\faGithub}
+\def \githublink {https://github.com/TreshurAllen}
+\def \githubtext {/TreshurAllen}
+
+%-------------WEBSITE DEF
+
+%\def \websiteicon {\faGlobe}
+%\def \websitelink {https://google.com/}
+%\def \websitetext {dwightschrute.com}
+
+\def \headertype {\doublecol} % \singlecol or \doublecol
+
+% Misc settings
+\def \entryspacing {-0pt}
+
+\def \bulletstyle {\faAngleRight}
+
+% Define colours
+\definecolor{primary}{HTML}{000000}
+%\definecolor{secondary}{HTML}{F75D5D} %Coral bright 
+%\definecolor{secondary}{HTML}{FFA0A0} %Coral light
+\definecolor{secondary}{HTML}{99DD8E} % sage
+%\definecolor{secondary}{HTML}{85F0E3} % cyan normal
+%\definecolor{secondary}{HTML}{A8FAF1} % cyan light
+\definecolor{accent}{HTML}{263827} % green undertone
+%\definecolor{accent}{HTML}{233331} % blue undertone
+\definecolor{links}{HTML}{1565C0}
+
+%------------------------------------------------------------------------------------------------------------------- 
+
+% Defines to make listing easier
+\def \linkedin {\linkedinicon \hspace{3pt}\href{\linkedinlink}{\linkedintext}}
+\def \phone {\phoneicon \hspace{3pt}{ \phonetext}}
+\def \email {\emailicon \hspace{3pt}\href{\emaillink}{\emailtext}}
+\def \github {\githubicon \hspace{3pt}\href{\githublink}{\githubtext}}
+\def \website {\websiteicon \hspace{3pt}\href{\websitelink}{\websitetext}}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.55in}
+\addtolength{\evensidemargin}{-0.55in}
+\addtolength{\textwidth}{1.1in}
+\addtolength{\topmargin}{-0.6in}
+\addtolength{\textheight}{1.1in}
+
+% Define the link colours
+\hypersetup{
+    colorlinks=true,
+    urlcolor=links,
+}
+
+% Set the margin alignment 
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+%-------------------------
+% Custom commands
+
+% Sections
+\renewcommand{\section}[2]{\vspace{5pt}
+  \colorbox{secondary}{\color{accent}\raggedbottom\normalsize\textbf{{#1}{\hspace{7pt}#2}}}
+}
+
+% Entry start and end, for spacing
+\newcommand{\resumeEntryStart}{\begin{itemize}[leftmargin=2.5mm]}
+\newcommand{\resumeEntryEnd}{\end{itemize}\vspace{\entryspacing}}
+
+% Itemized list for the bullet points under an entry, if necessary
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=4.5mm]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+% Resume item
+\renewcommand{\labelitemii}{\bulletstyle}
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+% Entry with title, subheading, date(s), and location
+\newcommand{\resumeEntryTSDL}[4]{
+  \vspace{-1pt}\item[]
+    \begin{tabularx}{0.97\textwidth}{X@{\hspace{60pt}}r}
+      \textbf{\color{primary}#1} & {\firabook\color{accent}\small#2} \\
+      \textit{\color{accent}\small#3} & \textit{\color{accent}\small#4} \\
+    \end{tabularx}\vspace{-6pt}
+}
+
+% Entry with title and date(s)
+\newcommand{\resumeEntryTD}[2]{
+  \vspace{-1pt}\item[]
+    \begin{tabularx}{0.97\textwidth}{X@{\hspace{60pt}}r}
+      \textbf{\color{primary}#1} & {\firabook\color{accent}\small#2} \\
+    \end{tabularx}\vspace{-6pt}
+}
+
+% Entry for special (skills)
+\newcommand{\resumeEntryS}[2]{
+  \item[]\small{
+    \textbf{\color{primary}#1 }{ #2 \vspace{-6pt}}
+  }
+}
+
+% Double column header
+\newcommand{\doublecol}[6]{
+  \begin{tabularx}{\textwidth}{Xr}
+    {
+      \begin{tabular}[c]{l}
+        \fontsize{35}{45}\selectfont{\color{primary}{{\textbf{\fullname}}}} \\
+        {\textit{\subtitle}} % You could add a subtitle here
+      \end{tabular}
+    } & {
+      \begin{tabular}[c]{l@{\hspace{1.5em}}l}
+        {\small#4} & {\small#1} \\
+        {\small#5} & {\small#2} \\
+        {\small#6} & {\small#3}
+      \end{tabular}
+    }
+  \end{tabularx}
+}
+
+% Single column header
+\newcommand{\singlecol}[6]{
+  \begin{tabularx}{\textwidth}{Xr}
+    {
+      \begin{tabular}[b]{l}
+        \fontsize{35}{45}\selectfont{\color{primary}{{\textbf{\fullname}}}} \\
+        {\textit{\subtitle}} % You could add a subtitle here
+      \end{tabular}
+    } & {
+      \begin{tabular}[c]{l}
+        {\small#1} \\
+        {\small#2} \\
+        {\small#3} \\
+        {\small#4} \\
+        {\small#5} \\
+        {\small#6}
+      \end{tabular}
+    }
+  \end{tabularx}
+}
+
+\begin{document}
+%-------------------------------------------------- BEGIN HERE --------------------------------------------------
+
+%---------------------------------------------------- HEADER ----------------------------------------------------
+
+\headertype{\linkedin}{\github}{\website}{\phone}{\email}{} % Set the order of items here
+\vspace{-10pt} % Set a negative value to push the body up, and the opposite
+
+%-------------------------------------------------- EDUCATION --------------------------------------------------
+\section{\faGraduationCap}{Education}
+
+  \resumeEntryStart
+    \resumeEntryTSDL
+      {University of Idaho}{2018 -- 2023}
+      {B.S. Computer Engineering}{Moscow, ID}
+  \resumeEntryEnd
+
+%-------------------------------------------------- EXPERIENCE --------------------------------------------------
+\section{\faPieChart}{Experience}
+
+  \resumeEntryStart
+    \resumeEntryTSDL
+      {University of Idaho HVAC }{9/2020 – 5/2022 }
+      {Data Entry}{Moscow, ID}
+    \resumeItemListStart
+      \resumeItem {Renamed all HVAC systems for campus (awarded excellence by Siemens HVAC systems) }
+      \resumeItem {Trusted access to 3D model of all buildings to change dampers, temperatures, heating tanks, ext.}
+      \resumeItem {Recorded the Universities assets and created preventative maintenance schedules. }
+    \resumeItemListEnd
+  \resumeEntryEnd
+
+  \resumeEntryStart
+    \resumeEntryTSDL
+      {University of Idaho Electrical Engineering Dpt.}{1/2022 – 5/2022  }
+      {Lab Instructor}{Moscow, ID}
+    \resumeItemListStart
+      \resumeItem {Instructor of the ECE 101 Lab, Teaching of basic circuit design}
+      \resumeItem {Management of due dates for student projects, returned quick and accurate feedback of reports }
+      \resumeItem {Provided correct solutions to problems on paper and in simulation, including circuit demonstrations}
+    \resumeItemListEnd
+  \resumeEntryEnd
+
+  \resumeEntryStart
+    \resumeEntryTSDL
+      {University of Idaho Interior Shop - Sign Crafter}{9/2018 – 8/2023 }
+      {Sign Crafter}{Moscow, ID}
+    \resumeItemListStart
+        \resumeItem {Created and installed directory signs for all of campus}
+        \resumeItem {Excellent Customer relations, successful de-escalation of unhappy customers }
+        \resumeItem {Trusted campus buildings and work vehicle access}
+    \resumeItemListEnd
+  \resumeEntryEnd
+
+  
+%-------------------------------------------------- PROGRAMMING SKILLS --------------------------------------------------
+\section{\faGears}{Skills}
+  
+%old entry next to each other 
+ \resumeEntryStart
+  \resumeEntryS{Software } {PuTTy, Spyder (Python), Microsoft, Excel, Xilinx, Cadence}
+  \resumeEntryS{Hardware } {Pic32, FPGA, Circuit Design, Buck / Boost Converter, WAN / LAN}
+  \resumeEntryS{Coding Languages} {C/C++, Python, VHDL, Linux / Unix, SystemVerilog}
+  \resumeEntryS{Class Experience} {Microcontrollers, Microprocessor, Finite State Machines, Digital Logic, Stacks/ Queues}
+ \resumeEntryEnd
+
+
+%-------------------------------------------------- PROJECTS --------------------------------------------------
+\section{\faCar}{Capstone Project}
+
+  \resumeEntryStart
+      \resumeEntryTSDL
+      {Joint Tactical Electrical Vehicle}{1/2023 – 12/2023}
+      {I was the Project Manager to the first steps of converting a 1990's diesel electric hybrid vehicle to a fully electric vehicle. I exhibited excellent communication, time management, and presentation skills. Through demonstrating my ability to propose new ideas to solve rising problems in the design process, I successfully organized and managed this project.}{}
+  \resumeEntryEnd
+
+
+\section{\faBook}{References}
+  \resumeEntryStart
+    \resumeEntryTSDL
+      {Keven Hattenburg}{(208) 596 - 1016}
+      {Data Entry Supervisor}{}
+      \resumeEntryTSDL
+      {Karen Frenzel}{(208) 885 - 7768}
+      {Engineering Lab Supervisor}{}
+      \resumeEntryTSDL
+      {Elaina McIntosh-Perry}{(208) 885 - 6246}
+      {University of Idaho Manager}{}
+      \resumeEntryTSDL
+      {Derek Zimmerman}{(208) 596 - 5687}
+      {Interior Shop Supervisor}{}
+  \resumeEntryEnd
+
+\end{document}
